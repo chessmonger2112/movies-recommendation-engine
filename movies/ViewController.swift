@@ -20,12 +20,11 @@ class ViewController: UIViewController {
             let siblingsSiblings = nodes[sibling]["links"] as! Array<Int>
             for siblingsSibling in siblingsSiblings {
                 if siblings.contains(siblingsSibling) {
-//                    print("index1: \(sibling), index2 \(siblingsSibling) dictionary: \(getPositionFromIndex)")
                     let point1 = getPositionFromIndex[sibling]!
                     let point2 = getPositionFromIndex[siblingsSibling]!
                     let title1 = getTitleFromIndex(sibling)
                     let title2 = getTitleFromIndex(siblingsSibling)
-                    print("\(title1) : \(title2)")
+//                    print("\(title1) : \(title2)")
                     
                     drawLineWithFromPointOneToPointTwo(point1, point2: point2)
                 }
@@ -55,6 +54,7 @@ class ViewController: UIViewController {
     }
     func eraseButtons(){
         for view in self.view.subviews {
+//            print("view is \(view)")
             let tag = view.tag
             if tag == RELATEDTAG {
                 view.removeFromSuperview()
@@ -63,6 +63,15 @@ class ViewController: UIViewController {
                 let button = self.view.viewWithTag(69) as! UIButton
                 let title = getTitleFromIndex(featured)
                 button.setTitle(title, forState: UIControlState.Normal)
+            }
+        }
+    }
+    
+    
+    func eraseLayers() {
+        for layer in view.layer.sublayers! {
+            if layer is CAShapeLayer{
+                layer.removeFromSuperlayer()
             }
         }
     }
@@ -100,15 +109,13 @@ class ViewController: UIViewController {
             deltaX = 0.0001
         }
         let m = deltaY / deltaX
-        let b = Double(y1) - m * Double(x1)
-        
-        
+        let b = Double(y1) - m * Double(x1)        
         
         if x1 < x2 {
             for pointX in x1 ... x2 {
                 let pointY = m * Double(pointX) + b
                 
-//                makeCircle(Int(pointX), y: Int(pointY))
+                makeCircle(Int(pointX), y: Int(pointY))
             }
         }
     }
@@ -165,6 +172,16 @@ class ViewController: UIViewController {
         print("calculated coordinates: \(calculateCoordinates(3, i: 1))")
         yPos = defaultY
     }
+    
+    
+//    func deleteCircles()
+//    {
+//        for subLay in view.layer {
+//            
+//        }
+//        
+//    }
+    
     
     func makeCircle(x : Int, y : Int)
     {

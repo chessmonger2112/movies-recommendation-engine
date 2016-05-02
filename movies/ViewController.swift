@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         featured = index
         print ("\(title) was clicked")
         eraseButtons()
+        eraseLayers()
         let currentMovie = nodes[featured]
         let links = currentMovie["links"] as! Array<Int>
         createLinks(links)
@@ -66,7 +67,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
     
     func eraseLayers() {
         for layer in view.layer.sublayers! {
@@ -172,16 +172,6 @@ class ViewController: UIViewController {
         print("calculated coordinates: \(calculateCoordinates(3, i: 1))")
         yPos = defaultY
     }
-    
-    
-//    func deleteCircles()
-//    {
-//        for subLay in view.layer {
-//            
-//        }
-//        
-//    }
-    
     
     func makeCircle(x : Int, y : Int)
     {

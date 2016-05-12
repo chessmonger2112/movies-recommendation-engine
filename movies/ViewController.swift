@@ -10,11 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
     @IBOutlet weak var abstractLabel: UILabel!
     var computation = Computation()
     
-    func findConnections(featured : Int) {
+    func findConnections(featured : Int) { //belongs in the model
         let siblings = nodes[featured]["links"] as! Array<Int> //array of the indicies of the featured film's siblings
         for sibling in siblings {
             let siblingsSiblings = nodes[sibling]["links"] as! Array<Int>
@@ -23,7 +22,7 @@ class ViewController: UIViewController {
                     let point1 = getPositionFromIndex[sibling]!
                     let point2 = getPositionFromIndex[siblingsSibling]!
                     
-                    drawLineWithFromPointOneToPointTwo(point1, point2: point2)
+                    drawLineWithFromPointOneToPointTwo(point1, point2: point2) //should return array instead of relying on side effects
                 }
             }
         }
@@ -47,7 +46,7 @@ class ViewController: UIViewController {
     func updateAbstract(){ //belongs in the view
         abstractLabel.text = getAbstractFromIndex(featured)
     }
-    func getTitleFromIndex (index : Int) -> String {
+    func getTitleFromIndex (index : Int) -> String { //belongs in the model
         return nodes[index]["title"] as! String
     }
     func eraseButtons(){ //belongs in the view
@@ -73,7 +72,7 @@ class ViewController: UIViewController {
         }
     }
 
-    func changeFeaturedsTitle() {
+    func changeFeaturedsTitle() { //belongs in the view
         print("supppp: \(self.view.subviews.count)")
         for view in self.view.subviews {
             let tag = view.tag
@@ -85,25 +84,17 @@ class ViewController: UIViewController {
         }
     }
     
-    func getAbstractFromIndex (index : Int) -> String {
+    func getAbstractFromIndex (index : Int) -> String { //belongs in the model
         let movie = nodes[index]
         let abstract = movie["abstract"] as! String
         return abstract
     }
-    
-    
-    func drawLineWithFromPointOneToPointTwo (point1 : (Int, Int), point2 :(Int, Int)) {
+        
+    func drawLineWithFromPointOneToPointTwo (point1 : (Int, Int), point2 :(Int, Int)) { //belongs in the controller
         let x1 = point1.0
-        let y1 = point1.1
         let x2 = point2.0
-        let y2 = point2.1
-        var deltaX = Double(x2 - x1)
-        let deltaY = Double(y2 - y1)
-        if deltaX == 0 {
-            deltaX = 0.0001
-        }
-        let m = deltaY / deltaX
-        let b = Double(y1) - m * Double(x1)        
+        let m = computation.getSlopeConstantFromTwoPoints(point1, point2: point2).0
+        let b = computation.getSlopeConstantFromTwoPoints(point1, point2: point2).1
         
         if x1 < x2 {
             for pointX in x1 ... x2 {
@@ -113,7 +104,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
     
     func makeFeaturedButton(title : String) { //belongs in the view
         let button = UIButton(type: UIButtonType.System)
@@ -183,16 +173,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("titles", ofType: "json")!)
-        let stringy = String(data: data!, encoding: NSUTF8StringEncoding )
-        let newData = stringy!.dataUsingEncoding(NSUTF8StringEncoding)
-        let jsonDict = try! NSJSONSerialization.JSONObjectWithData(newData!, options: [])
-        var jsonResult = jsonDict as! Dictionary<String, AnyObject> //converts AnyObject to dictionary
-        let nodes1 = jsonResult["nodes"]! as! Array<Dictionary<String, AnyObject>> //converts AnyObject to array
-        nodes = nodes1
+        nodes = computation.getNodes()
         let title = getTitleFromIndex(featured)
         makeFeaturedButton(title)
-        let looper = nodes1[0]
+        let looper = nodes[0]
         let links = looper["links"] as! Array<Int>
         createLinks(links)
         let abstract = getAbstractFromIndex(featured)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		834188541CE414DE00EC846C /* Computation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834188531CE414DE00EC846C /* Computation.swift */; };
 		835DBAAB1CB7805300F7B5A2 /* titles.json in Resources */ = {isa = PBXBuildFile; fileRef = 835DBAAA1CB7805300F7B5A2 /* titles.json */; };
 		835DBAB11CB7898900F7B5A2 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DBAB01CB7898900F7B5A2 /* StringUtils.m */; };
 		836641FF1CB77379005A34B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836641FE1CB77379005A34B1 /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		834188531CE414DE00EC846C /* Computation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Computation.swift; sourceTree = "<group>"; };
 		835DBAAA1CB7805300F7B5A2 /* titles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = titles.json; sourceTree = "<group>"; };
 		835DBAAC1CB7893B00F7B5A2 /* movies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "movies-Bridging-Header.h"; sourceTree = "<group>"; };
 		835DBAAF1CB7898900F7B5A2 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			children = (
 				836641FE1CB77379005A34B1 /* AppDelegate.swift */,
 				836642001CB77379005A34B1 /* ViewController.swift */,
+				834188531CE414DE00EC846C /* Computation.swift */,
 				836642021CB77379005A34B1 /* Main.storyboard */,
 				836642051CB77379005A34B1 /* Assets.xcassets */,
 				836642071CB77379005A34B1 /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 				836642011CB77379005A34B1 /* ViewController.swift in Sources */,
 				835DBAB11CB7898900F7B5A2 /* StringUtils.m in Sources */,
 				836641FF1CB77379005A34B1 /* AppDelegate.swift in Sources */,
+				834188541CE414DE00EC846C /* Computation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
